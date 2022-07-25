@@ -1,8 +1,9 @@
 import asyncio
+from turtle import st
 import tornado.httpserver
 import tornado.options
 import tornado.web
-
+import sys
 from tornado.options import define, options
 
 define("port", default=8888, help="run on the given port", type=int)
@@ -22,6 +23,12 @@ class UploadHandler(tornado.web.RequestHandler):
         output_file.write(file1['body'])
 
         self.finish("file " + original_fname + " is uploaded")
+
+    def get(self):
+        arr = bytearray([1] * 1024*30)
+        arr = str(arr)
+        print("size of arr:  ",sys.getsizeof(arr))
+        self.finish("heello" + arr)
 
 async def main():
     tornado.options.parse_command_line()
