@@ -12,10 +12,19 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
 
+class UploadHandler(tornado.web.RequestHandler):
+    def post(self):
+        file1 = self.request.files['file1'][0]
+        original_fname = file1['filename']
+
+        output_file = open("uploads/" + original_fname, 'wb')
+        output_file.write(file1['body'])
+
+        self.finish("file " + original_fname + " is uploaded")
 
 async def main():
     tornado.options.parse_command_line()
-    application = tornado.web.Application([(r"/", MainHandler)])
+    application = tornado.web.Application([(r"/", MainHandler), (r"/upload", UploadHandler)])
     http_server = tornado.httpserver.HTTPServer(application)
     print("Server running -- ", options.port)
     http_server.listen(options.port)
