@@ -14,7 +14,8 @@ class MainHandler(tornado.web.RequestHandler):
 
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
-        file1 = self.request.files['file1'][0]
+        # print(self.request.files)
+        file1 = self.request.files['file'][0]
         original_fname = file1['filename']
 
         output_file = open("uploads/" + original_fname, 'wb')
