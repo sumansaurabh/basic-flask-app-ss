@@ -10,11 +10,11 @@ define("port", default=8888, help="run on the given port", type=int)
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello, world. From port - "+options.port)
+        self.write("Hello, world. From port - "+str(options.port))
 
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
-        # print(self.request.files)
+        print("hello ::: ",self.request.files)
         file1 = self.request.files['file'][0]
         original_fname = file1['filename']
 
