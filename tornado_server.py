@@ -5,6 +5,10 @@ import tornado.options
 import tornado.web
 import sys
 from tornado.options import define, options
+# generate random floating point values
+from random import seed
+from random import random
+seed(1)
 
 define("port", default=8888, help="run on the given port", type=int)
 
@@ -25,7 +29,10 @@ class UploadHandler(tornado.web.RequestHandler):
         self.finish("file " + original_fname + " is uploaded")
 
     def get(self):
-        arr = bytearray([1] * 1024*30)
+
+        arr = [1] * 1024*30
+        for i in range(len(arr)):
+            arr[i] = random()
         arr = str(arr)
         print("size of arr:  ",sys.getsizeof(arr))
         self.finish("heello" + arr)
