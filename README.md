@@ -14,3 +14,5 @@ After installing all dependencies, run the app by entering its folder and typing
 
 To kill all the flask server
 `./kill_process.sh` - will kill all the above flask server
+
+[查看中文版本 (View in Chinese)](README.zh-CN.md)
